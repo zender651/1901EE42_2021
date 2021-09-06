@@ -1,5 +1,15 @@
 import os
 
+cur_dir = os.getcwd()                       # for folders
+final_roll_dir = os.path.join(
+    cur_dir, 'output_individual_roll')
+final_dir_subno = os.path.join(
+    cur_dir, 'output_by_subject')
+if not os.path.exists(final_roll_dir):
+    os.makedirs(final_roll_dir)
+if not os.path.exists(final_dir_subno):
+    os.makedirs(final_dir_subno)
+    
 fl_data = open("regtable_old.csv", "r")           # opening the file
 
 directory = './output_by_subject'             # linking to the directory by subject
