@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='favicon.ico') }}"/>
+    <title>{{title}}</title>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Add CSS File. -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+      #green{
+          background-color: #01DC69;
+      }
+      #red{
+          background-color: #f44336;
+
+      }
+  </style>
+  </head>
+  <body>
+     
+   
+    <div class="menu_bar">
+      <ul>
+          <li>About Us
+              <div class="sub-menu">
+                <ul>
+                    <li><a href='https://github.com/zender651/1901EE42_2021' target="_blank">Nishan Biswas 1901EE42</a></li>
+                    <li><a href='https://github.com/pankajsngh2000/1901EE44_2021' target="_blank">Pankaj Singh 1901EE44</a></li>
+                </ul>
+              </div>
+       
+          </li>
+      </ul>
+    <div class="interface">
+    <h1>{{title}}</h1>
+    <form action="{{ url_for('index') }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <p>{{form.rollno_range.label}} {{form.rollno_range}}</p>
+        <p>{{form.grades.label}} {{form.grades}}</p>
+        <p>{{form.name_roll.label}} {{form.name_roll}}</p>
+        <p>{{form.subjects_master.label}} {{form.subjects_master}}</p>
+        <p>{{form.seal.label}} {{form.seal}}</p>
+        <p>{{form.sign.label}} {{form.sign}}
+        </p>
+        <p>{{form.generate_trans}}</p>    
+        <!-- {% if msg %}
+          <p id="{{colour}}">{{msg}}</p>  
+        {% else %}
+        {% endif %} -->
+    </form>
+    <div class="container">
+      <div class="wrapper">
+         <div class="image">
+            <img src="" alt="">
+         </div>
+         <div class="content">
+            <div class="icon">
+               <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <div class="text">
+               No file chosen, yet!
+            </div>
+         </div>
+         <div id="cancel-btn">
+            <i class="fas fa-times"></i>
+         </div>
+         <div class="file-name">
+            File name here
+         </div>
+      </div>
+      <button onclick="defaultBtnActive()" id="custom-btn">Choose signature image</button>
+      <input id="default-btn" type="file" hidden>
+   </div>
+   <div class="container2">
+    <div class="wrapper2">
+       <div class="image2">
+          <img id="abc" src="" alt="">
+       </div>
+       <div class="content2">
+          <div class="icon2">
+             <i class="fas fa-cloud-upload-alt"></i>
+          </div>
+          <div class="text">
+             No file chosen, yet!
+          </div>
+       </div>
+       <div id="cancel-btn2">
+          <i class="fas fa-times"></i>
+       </div>
+       <div class="file-name2">
+          File name here
+       </div>
+    </div>
+    <button onclick="defaultBtnActive2()" id="custom-btn2">Choose seal image</button>
+    <input id="default-btn2" type="file" hidden>
+ </div>
+  
+ <!-- Add JavaScript here!! -->
+ 
+    <script>
+      const wrapper = document.querySelector(".wrapper");
+      const fileName = document.querySelector(".file-name");
+      const defaultBtn = document.querySelector("#sign");
+      const customBtn = document.querySelector("#custom-btn");
+      const cancelBtn = document.querySelector("#cancel-btn i");
+      const img = document.querySelector("img");
+      let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+      function defaultBtnActive(){
+        defaultBtn.click();
+      }
+      defaultBtn.addEventListener("change", function(){
+        const file = this.files[0];
+        if(file){
+          const reader = new FileReader();
+          reader.onload = function(){
+            const result = reader.result;
+            img.src = result;
+            wrapper.classList.add("active");
+          }
+          cancelBtn.addEventListener("click", function(){
+            img.src = "";
+            wrapper.classList.remove("active");
+          })
+          reader.readAsDataURL(file);
+        }
+        if(this.value){
+          let valueStore = this.value.match(regExp);
+          fileName.textContent = valueStore;
+        }
+      });
+    </script>
+    <script>
+    const wrapper2 = document.querySelector(".wrapper2");
+    const fileName2 = document.querySelector(".file-name2");
+    const defaultBtn2 = document.querySelector("#seal");
+    const customBtn2 = document.querySelector("#custom-btn2");
+    const cancelBtn2 = document.querySelector("#cancel-btn2 i");
+    const img2 = document.querySelector("#abc");
+    let regExp2 = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+    function defaultBtnActive2(){
+      defaultBtn2.click();
+    }
+    defaultBtn2.addEventListener("change", function(){
+      const file2 = this.files[0];
+      if(file2){
+        const reader2 = new FileReader();
+        reader2.onload = function(){
+          const result2 = reader2.result;
+          img2.src = result2;
+          wrapper2.classList.add("active");
+        }
+        cancelBtn2.addEventListener("click", function(){
+          img2.src = "";
+          wrapper2.classList.remove("active");
+        })
+        reader2.readAsDataURL(file2);
+      }
+      if(this.value){
+        let valueStore2 = this.value.match(regExp2);
+        fileName2.textContent = valueStore2;
+      }
+    });
+ </script>
+ <!-- Alert -->
+ {% if msg %}
+                <div class="alert" id={{colour}}>
+                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span><span class="msg">
+                   {{msg}}
+                 </span> 
+    {% else %}
+    {% endif %}
+</div>
+</body>
+</html>

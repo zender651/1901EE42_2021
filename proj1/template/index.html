@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='favicon.ico') }}"/>
+    <title>{{title}}</title>
+    <!-- Add CSS File. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}">
+    <style>
+        #green{
+            color: #01DC69;
+            border-bottom: 5px solid #01DC69;
+        }
+        #red{
+            color: red;
+            border-bottom: 5px solid red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu_bar">
+           <ul>
+               <li><a href="#"><i class="fa fa user">About Us</a>
+                   <div class="sub-menu">
+                        <ul>
+                            <li><a href='https://github.com/zender651/1901EE42_2021' target="_blank">Nishan Biswas 1901EE42</a></li>
+                            <li><a href='https://github.com/pankajsngh2000/1901EE44_2021' target="_blank">Pankaj Singh 1901EE44</a></li>
+                        </ul>
+                   </div>
+               </li>
+           </ul>
+        </div>
+        <div class="About"></div>
+        <div class="Gui_program">
+            <h1 class="glow">{{title}}</h1>
+            {% if msg %}
+                <div class="alert" id="{{colour}}">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    {{msg}}</div>    
+            {% else %}
+            {% endif %}
+            
+            <!-- Form -->
+            <form  action="{{ url_for('index') }}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <p>
+                    {{form.master_roll.label}}
+                    {{form.master_roll}}  
+                </p>
+                <p>
+                    {{form.response.label}}
+                    {{form.response}}   
+                </p>
+                <p>
+                    {{form.corr_marks.label}}
+                    {{form.corr_marks}}
+                </p>
+                <p>
+                    {{form.wrng_marks.label}}
+                    {{form.wrng_marks}}
+                </p>
+                <p>
+                    {{form.generate_ms_btn}}
+                </p>
+                <p>
+                    {{form.con_ms_btn}}
+                </p>
+                <p>
+                    {{form.send_email_btn}}
+                </p>  
+            </form>
+        </>
+    </header>
+</body>
+</html>
