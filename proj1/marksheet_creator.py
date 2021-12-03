@@ -232,10 +232,12 @@ def marksheet_creator_run(ms_csv_filepath, r_csv_filepath, pos_marks, neg_marks,
             master_roll_data = list(csv.reader(f1))[1:]
             responses_data = list(csv.reader(f2))[1:]
             all_roll_no = [el[0] for el in master_roll_data]
-            corr_ans = responses_data[0][7:]
             for r in responses_data:
+                marks = r[2].split(' / ')
+                if marks[0] == marks[-1]:
+                    corr_ans = responses_data[0][7:]
                 if not r[6] in all_roll_no:
-                    return 'No roll number with ANSWER is present, Cannot Process!', 'red'
+                    return 'No roll number with {} is present, Cannot Process!'.format(r[6]), 'red'
             if opt == 1:
                 for row in master_roll_data:
                     r_data = list(
