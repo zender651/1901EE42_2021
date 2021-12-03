@@ -172,7 +172,7 @@ def _create_marksheet_func(roll_no, name, stud_res, corr_ans, pos_marks, neg_mar
         sheet['B16'].border = border_style
         sheet['B16'].alignment = Alignment(horizontal='center')
         idx = 0
-        for row in sheet['A17:B{}'.format(17+max_ques)]:
+        for row in sheet['A17:B{}'.format(16+max_ques)]:
             row[0].border = border_style
             row[0].alignment = Alignment(horizontal='center')
             row[1].border = border_style
